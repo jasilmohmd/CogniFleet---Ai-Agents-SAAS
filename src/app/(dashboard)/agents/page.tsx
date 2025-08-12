@@ -10,13 +10,13 @@ import { auth } from "@/lib/auth";
 
 import { getQueryClient, trpc } from "@/trpc/server";
 
+import { loadSearchParams } from "@/modules/agents/params";
 import { AgentsListHeader } from "@/modules/agents/ui/components/agents-list-header";
 import {
   AgentsView,
   AgentsViewError,
   AgentsViewLoading
 } from "@/modules/agents/ui/views/agents-view";
-import { loadSearchParams } from "@/modules/agents/params";
 
 interface Props {
   searchParams: Promise<SearchParams>
@@ -25,6 +25,7 @@ interface Props {
 const Page = async ({ searchParams }: Props) => {
 
   const filters = await loadSearchParams(searchParams);
+  
 
   const session = await auth.api.getSession({
     headers: await headers(),
