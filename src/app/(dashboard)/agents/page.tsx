@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { headers } from "next/headers";
+import { SearchParams } from "nuqs";
 import { ErrorBoundary } from "react-error-boundary"
 import { redirect } from "next/navigation";
 
@@ -15,8 +16,15 @@ import {
   AgentsViewError,
   AgentsViewLoading
 } from "@/modules/agents/ui/views/agents-view";
+import { loadSearchParams } from "@/modules/agents/params";
 
-const Page = async () => {
+interface Props {
+  searchParams: Promise<SearchParams>
+}
+
+const Page = async ({ searchParams }: Props) => {
+
+  const filters = await loadSearchParams(searchParams);
 
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -27,7 +35,9 @@ const Page = async () => {
   }
 
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(trpc.agents.getMany.queryOptions());
+  void queryClient.prefetchQuery(trpc.agents.getMany.queryOptions({
+    ...filters
+  }));
 
   return (
     <>
