@@ -25,7 +25,6 @@ export const agentsRouter = createTRPCRouter({
 
     return existingAgent;
   }),
-  // TODO: Change 'getMany' to use 'protectedProcedure'
   getMany: protectedProcedure
     .input(
       z.object({
@@ -52,7 +51,7 @@ export const agentsRouter = createTRPCRouter({
         .where(
           and(
             eq(agents.userId, ctx.auth.user.id),
-            search ? ilike(agents.name, `%${search}`) : undefined,
+            search ? ilike(agents.name, `%${search}%`) : undefined,
           )
         )
         .orderBy(desc(agents.createdAt), desc(agents.id))
@@ -64,7 +63,7 @@ export const agentsRouter = createTRPCRouter({
         .where(
           and(
             eq(agents.userId, ctx.auth.user.id),
-            search ? ilike(agents.name, `%${search}`) : undefined,
+            search ? ilike(agents.name, `%${search}%`) : undefined,
           )
         );
 
