@@ -1,0 +1,36 @@
+{
+  "context": {
+    "function": "createTRPCContext",
+    "file": "src/trpc/init.ts",
+    "returns": "{ userId: string, auth?: Session }",
+    "sessionSource": "auth.api.getSession({ headers })"
+  },
+  "procedureHelpers": [
+    "createTRPCRouter",
+    "createCallerFactory",
+    "baseProcedure",
+    "protectedProcedure"
+  ],
+  "protectedProcedure": {
+    "validates": "Better Auth session via headers",
+    "throws": "TRPCError(UNAUTHORIZED) if no session",
+    "attaches": "ctx.auth = session"
+  },
+  "routerStructure": {
+    "root": "src/trpc/routers/_app.ts",
+    "modules": ["agents", "meetings"],
+    "exportType": "AppRouter"
+  },
+  "clientUsage": {
+    "server": "createCallerFactory(appRouter)(context)",
+    "client": "useTRPC() + useSuspenseQuery/queryOptions"
+  },
+  "errorCodes": [
+    "NOT_FOUND",
+    "UNAUTHORIZED",
+    "BAD_REQUEST",
+    "INTERNAL_SERVER_ERROR"
+  ],
+  "validation": "Zod schemas via .input() on procedures",
+  "typeInference": "inferRouterOutputs<AppRouter>[module][procedure]"
+}

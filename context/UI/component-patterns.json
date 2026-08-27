@@ -1,0 +1,28 @@
+{
+  "uiLibrary": "Radix UI + Tailwind CSS 4 (shadcn/ui style)",
+  "componentCount": "40+ components in src/components/ui/",
+  "patterns": {
+    "compoundComponents": "Radix compound pattern (Dialog, Select, DropdownMenu, Sheet, Tooltip, Sidebar)",
+    "classNameMerging": "cn() utility (clsx + tailwind-merge)",
+    "variants": "class-variance-authority (cva) for Button, Badge, etc.",
+    "forwardRef": "React.forwardRef for composition",
+    "forms": "React Hook Form + Zod resolver + FormField/FormItem/FormControl/FormMessage",
+    "tables": "TanStack Table v8 with useReactTable",
+    "icons": "Lucide React",
+    "toasts": "Sonner"
+  },
+  "keyComponents": [
+    "Dialog", "Select", "DropdownMenu", "Sheet", "Tooltip", "Sidebar",
+    "Table", "Tabs", "Avatar", "Button", "Input", "Label", "Form",
+    "Command", "NavigationMenu", "Popover", "HoverCard", "ScrollArea",
+    "Separator", "Slider", "Switch", "Toggle", "ToggleGroup", "RadioGroup",
+    "Checkbox", "Progress", "Skeleton", "Pagination", "ResizablePanels",
+    "InputOtp", "Menubar", "ContextMenu", "Collapsible", "Accordion"
+  ],
+  "styling": {
+    "framework": "Tailwind CSS 4",
+    "cssVariables": "globals.css for theming",
+    "darkMode": "next-themes + CSS variables",
+    "radixTheming": "CSS variables for component customization"
+  }
+}

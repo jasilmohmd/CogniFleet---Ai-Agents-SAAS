@@ -1,0 +1,68 @@
+{
+  "tables": [
+    {
+      "name": "user",
+      "source": "better-auth",
+      "columns": ["id", "name", "email", "emailVerified", "image", "createdAt", "updatedAt"]
+    },
+    {
+      "name": "session",
+      "source": "better-auth",
+      "columns": ["id", "expiresAt", "token", "createdAt", "updatedAt", "ipAddress", "userAgent", "userId"]
+    },
+    {
+      "name": "account",
+      "source": "better-auth",
+      "columns": ["id", "accountId", "providerId", "userId", "accessToken", "refreshToken", "idToken", "accessTokenExpiresAt", "refreshTokenExpiresAt", "scope", "password", "createdAt", "updatedAt"]
+    },
+    {
+      "name": "verification",
+      "source": "better-auth",
+      "columns": ["id", "identifier", "value", "expiresAt", "createdAt", "updatedAt"]
+    },
+    {
+      "name": "agents",
+      "columns": [
+        { "name": "id", "type": "text", "pk": true, "default": "nanoid()" },
+        { "name": "name", "type": "text", "notNull": true },
+        { "name": "userId", "type": "text", "notNull": true, "fk": "user.id", "onDelete": "cascade" },
+        { "name": "instructions", "type": "text", "notNull": true },
+        { "name": "createdAt", "type": "timestamp", "notNull": true, "default": "now()" },
+        { "name": "updatedAt", "type": "timestamp", "notNull": true, "default": "now()" }
+      ]
+    },
+    {
+      "name": "meetings",
+      "columns": [
+        { "name": "id", "type": "text", "pk": true, "default": "nanoid()" },
+        { "name": "name", "type": "text", "notNull": true },
+        { "name": "userId", "type": "text", "notNull": true, "fk": "user.id", "onDelete": "cascade" },
+        { "name": "agentId", "type": "text", "notNull": true, "fk": "agents.id", "onDelete": "cascade" },
+        { "name": "status", "type": "enum", "enumName": "meeting_status", "values": ["upcoming", "active", "completed", "processing", "cancelled"], "default": "upcoming" },
+        { "name": "startedAt", "type": "timestamp", "nullable": true },
+        { "name": "endedAt", "type": "timestamp", "nullable": true },
+        { "name": "transcriptUrl", "type": "text", "nullable": true },
+        { "name": "recordingUrl", "type": "text", "nullable": true },
+        { "name": "summary", "type": "text", "nullable": true },
+        { "name": "createdAt", "type": "timestamp", "notNull": true, "default": "now()" },
+        { "name": "updatedAt", "type": "timestamp", "notNull": true, "default": "now()" }
+      ]
+    }
+  ],
+  "relations": [
+    { "from": "user", "to": "session", "type": "1:M", "cascade": true },
+    { "from": "user", "to": "account", "type": "1:M", "cascade": true },
+    { "from": "user", "to": "agents", "type": "1:M", "cascade": true },
+    { "from": "user", "to": "meetings", "type": "1:M", "cascade": true },
+    { "from": "agents", "to": "meetings", "type": "1:M", "cascade": true }
+  ],
+  "enums": [
+    { "name": "meeting_status", "values": ["upcoming", "active", "completed", "processing", "cancelled"] }
+  ],
+  "config": {
+    "out": "./drizzle",
+    "schema": "./src/db/schema.ts",
+    "dialect": "postgresql",
+    "driver": "neon-http"
+  }
+}

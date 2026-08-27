@@ -1,0 +1,41 @@
+{
+  "module": "call",
+  "description": "Live video call UI with Stream Video SDK",
+  "views": [
+    "CallView"
+  ],
+  "components": [
+    "CallProvider",
+    "CallUI",
+    "CallLobby",
+    "CallActive",
+    "CallConnect",
+    "CallEnded"
+  ],
+  "trpcUsage": [
+    "meetings.getOne",
+    "meetings.generateToken",
+    "meetings.generateChatToken"
+  ],
+  "stateMachine": [
+    "lobby",
+    "connecting",
+    "active",
+    "ended"
+  ],
+  "streamVideo": {
+    "callType": "default",
+    "callId": "meetingId",
+    "features": [
+      "transcription (auto-on)",
+      "recording (auto-on, 1080p)",
+      "closed captions (auto-on)"
+    ]
+  },
+  "patterns": [
+    "Server component for initial fetch + auth guard",
+    "Client boundary at CallProvider for Stream SDK",
+    "Meeting status check prevents joining completed calls",
+    "Error boundary for not found/ended states"
+  ]
+}

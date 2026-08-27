@@ -1,0 +1,121 @@
+{
+  "module": "meetings",
+  "description": "Core meeting management with video calls, transcripts, and chat",
+  "procedures": [
+    {
+      "name": "create",
+      "type": "mutation",
+      "input": "meetingsInsertSchema",
+      "output": "Meeting",
+      "description": "Create new meeting and Stream Video call"
+    },
+    {
+      "name": "getOne",
+      "type": "query",
+      "input": "{ id: string }",
+      "output": "MeetingGetOne",
+      "description": "Get meeting with agent and computed duration"
+    },
+    {
+      "name": "getMany",
+      "type": "query",
+      "input": "{ page: number, pageSize: number, search?: string, agentId?: string, status?: MeetingStatus }",
+      "output": "{ items: MeetingGetMany[], total: number, totalPages: number }",
+      "description": "Paginated, filtered meeting list"
+    },
+    {
+      "name": "update",
+      "type": "mutation",
+      "input": "meetingsUpdateSchema",
+      "output": "Meeting",
+      "description": "Update meeting fields"
+    },
+    {
+      "name": "remove",
+      "type": "mutation",
+      "input": "{ id: string }",
+      "output": "Meeting",
+      "description": "Delete meeting"
+    },
+    {
+      "name": "generateToken",
+      "type": "mutation",
+      "input": "void",
+      "output": "string",
+      "description": "Generate Stream Video user token"
+    },
+    {
+      "name": "generateChatToken",
+      "type": "mutation",
+      "input": "void",
+      "output": "string",
+      "description": "Generate Stream Chat user token"
+    },
+    {
+      "name": "getTranscript",
+      "type": "query",
+      "input": "{ id: string }",
+      "output": "StreamTranscriptItemWithSpeaker[]",
+      "description": "Fetch and parse transcript with speaker avatars"
+    }
+  ],
+  "schemas": [
+    "meetingsInsertSchema",
+    "meetingsUpdateSchema"
+  ],
+  "types": [
+    "MeetingGetOne",
+    "MeetingGetMany",
+    "MeetingStatus",
+    "StreamTranscriptItem"
+  ],
+  "components": [
+    "MeetingsView",
+    "MeetingIdView",
+    "MeetingIdViewHeader",
+    "MeetingForm",
+    "NewMeetingDialog",
+    "UpdateMeetingDialog",
+    "MeetingsListHeader",
+    "MeetingsSearchFilter",
+    "StatusFilter",
+    "AgentIdFilter",
+    "Columns",
+    "UpcomingState",
+    "ActiveState",
+    "CompletedState",
+    "ProcessingState",
+    "CancelledState",
+    "Transcript",
+    "ChatUI",
+    "ChatProvider"
+  ],
+  "hooks": [
+    "useMeetingsFilters"
+  ],
+  "database": {
+    "table": "meetings",
+    "columns": [
+      "id", "name", "userId", "agentId", "status",
+      "startedAt", "endedAt", "transcriptUrl", "recordingUrl", "summary",
+      "createdAt", "updatedAt"
+    ],
+    "relations": {
+      "userId": "user (cascade)",
+      "agentId": "agents (cascade)"
+    },
+    "enum": "meeting_status: upcoming | active | completed | processing | cancelled"
+  },
+  "integrations": [
+    "stream-video",
+    "stream-chat",
+    "dicebear-avatar"
+  ],
+  "statusFlow": [
+    "upcoming",
+    "active",
+    "completed",
+    "processing",
+    "cancelled"
+  ]
+}

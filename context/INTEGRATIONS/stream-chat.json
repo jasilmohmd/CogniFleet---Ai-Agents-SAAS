@@ -1,0 +1,25 @@
+{
+  "sdk": "stream-chat (core), stream-chat-react (React components)",
+  "clientInit": "StreamChat.getInstance(apiKey, secretKey) - singleton",
+  "serverProcedures": ["generateChatToken"],
+  "keyOperations": [
+    "createToken(userId)",
+    "upsertUser({ id, role: 'admin' })",
+    "client.connectUser(user, token)",
+    "client.channel('messaging', meetingId).watch()"
+  ],
+  "channelConfig": {
+    "type": "messaging",
+    "id": "meetingId",
+    "members": ["userId", "agentId"]
+  },
+  "clientComponents": [
+    "ChatProvider (context)",
+    "ChatUI (MessageList + MessageInput)",
+    "ChannelList (if needed)"
+  ],
+  "envVars": [
+    "NEXT_PUBLIC_STREAM_CHAT_API_KEY",
+    "STREAM_CHAT_SECRET_KEY"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schemas": [
+    {
+      "name": "meetingsInsertSchema",
+      "module": "meetings",
+      "fields": {
+        "name": { "type": "string", "min": 1, "message": "Name is required" },
+        "agentId": { "type": "string", "min": 1, "message": "Agent is required" }
+      }
+    },
+    {
+      "name": "meetingsUpdateSchema",
+      "module": "meetings",
+      "extends": "meetingsInsertSchema",
+      "additionalFields": {
+        "id": { "type": "string", "min": 1, "message": "Id is required" }
+      }
+    },
+    {
+      "name": "agentsInsertSchema",
+      "module": "agents",
+      "fields": {
+        "name": { "type": "string", "min": 1, "message": "Name is required" },
+        "instructions": { "type": "string", "min": 1, "message": "Instructions is required" }
+      }
+    },
+    {
+      "name": "agentsUpdateSchema",
+      "module": "agents",
+      "extends": "agentsInsertSchema",
+      "additionalFields": {
+        "id": { "type": "string", "min": 1, "message": "Id is required" }
+      }
+    }
+  ],
+  "patterns": [
+    "Insert schema: required fields only",
+    "Update schema: extends insert + required ID",
+    "Co-located in module/schema.ts",
+    "Exported for form reuse with zodResolver"
+  ],
+  "validationMessages": "Custom via { message: \"...\" }"
+}

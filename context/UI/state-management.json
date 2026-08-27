@@ -1,0 +1,63 @@
+{
+  "layers": [
+    {
+      "name": "Server State",
+      "tool": "TanStack Query + tRPC",
+      "scope": "Global, cached, server-synced",
+      "patterns": [
+        "useSuspenseQuery for blocking fetches",
+        "useQuery for non-blocking",
+        "useMutation for writes",
+        "Auto-invalidation via queryKey",
+        "tRPC queryOptions for type-safe keys"
+      ]
+    },
+    {
+      "name": "URL State",
+      "tool": "nuqs",
+      "scope": "Shareable, bookmarkable, SSR-compatible",
+      "parsers": [
+        "parseAsString",
+        "parseAsInteger",
+        "parseAsStringEnum",
+        "parseAsBoolean"
+      ],
+      "options": "withOptions({ clearOnDefault: true })",
+      "usage": "createLoader for server, useSearchParams for client"
+    },
+    {
+      "name": "Form State",
+      "tool": "React Hook Form + Zod",
+      "scope": "Form-local, validated",
+      "patterns": [
+        "zodResolver(schema)",
+        "defaultValues",
+        "formState.isSubmitting",
+        "FormField/FormItem/FormControl/FormMessage"
+      ]
+    },
+    {
+      "name": "Local UI State",
+      "tool": "React useState/useReducer/useRef",
+      "scope": "Component-scoped",
+      "patterns": [
+        "useState for toggles/inputs",
+        "useReducer for state machines (call: lobby→active→ended)",
+        "useRef for DOM/mutable values"
+      ]
+    },
+    {
+      "name": "Theme",
+      "tool": "next-themes + Context",
+      "scope": "Global, persisted",
+      "config": "attribute='class', defaultTheme='system'"
+    }
+  ],
+  "providers": [
+    "TRPCReactProvider",
+    "QueryClientProvider",
+    "NuqsAdapter",
+    "ThemeProvider",
+    "Toaster (Sonner)"
+  ]
+}

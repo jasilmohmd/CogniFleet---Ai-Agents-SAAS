@@ -1,0 +1,26 @@
+{
+  "packages": ["@dicebear/core", "@dicebear/collection"],
+  "function": "generateAvatarUri({ seed, variant })",
+  "variants": {
+    "initials": {
+      "useCase": "Users",
+      "style": "initials",
+      "options": { "fontWeight": 500, "fontSize": 42 },
+      "fallback": "When user.image is null"
+    },
+    "botttsNeutral": {
+      "useCase": "Agents/Bots",
+      "style": "botttsNeutral",
+      "options": { "seed": "agent.name" }
+    }
+  },
+  "returnType": "Data URI (data:image/svg+xml;base64,...)",
+  "usage": [
+    "Transcript speaker avatars",
+    "Call participant avatars",
+    "Sidebar/user menu avatars",
+    "Chat message avatars",
+    "Agents list avatars"
+  ],
+  "deterministic": "Same seed always produces same avatar"
+}

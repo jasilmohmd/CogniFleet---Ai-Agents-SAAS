@@ -1,0 +1,29 @@
+{
+  "sdk": "@stream-io/node-sdk (server), @stream-io/video-react-sdk (client)",
+  "clientInit": "StreamClient(apiKey, secretKey)",
+  "serverProcedures": ["generateToken"],
+  "keyOperations": [
+    "upsertUsers (before token generation)",
+    "generateUserToken (user_id, exp, validity_in_seconds)",
+    "video.call(type, id).create() - create call with settings",
+    "upsertUsers for agents as participants"
+  ],
+  "callSettings": {
+    "type": "default",
+    "id": "meetingId",
+    "transcription": { "language": "en", "mode": "auto-on", "closed_caption_mode": "auto-on" },
+    "recording": { "mode": "auto-on", "quality": "1080p" },
+    "custom": { "meetingId", "meetingName" }
+  },
+  "clientFlow": [
+    "CallProvider creates StreamVideoClient",
+    "client.call('default', meetingId)",
+    "call.join({ create: true })",
+    "call.state provides reactive participants, tracks, transcription"
+  ],
+  "envVars": [
+    "NEXT_PUBLIC_STREAM_VIDEO_API_KEY",
+    "STREAM_VIDEO_SECRET_KEY"
+  ],
+  "agentIntegration": "Upsert agent as user with botttsNeutral avatar"
+}

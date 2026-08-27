@@ -1,0 +1,44 @@
+{
+  "patterns": [
+    {
+      "name": "paginatedListWithJoin",
+      "description": "Select with join, computed column, filters, pagination",
+      "example": "meetings.getMany",
+      "keyFunctions": ["getTableColumns", "innerJoin", "and", "eq", "ilike", "desc", "limit", "offset", "sql"]
+    },
+    {
+      "name": "countForPagination",
+      "description": "Total count for pagination metadata",
+      "keyFunctions": ["count", "select", "innerJoin", "and", "eq", "ilike"]
+    },
+    {
+      "name": "singleByIdWithUser",
+      "description": "Get one record with user isolation",
+      "keyFunctions": ["select", "from", "where", "and", "eq"]
+    },
+    {
+      "name": "createWithUserId",
+      "description": "Insert with authenticated user ID",
+      "keyFunctions": ["insert", "values", "returning"]
+    },
+    {
+      "name": "updateWithUserId",
+      "description": "Update with ownership check",
+      "keyFunctions": ["update", "set", "where", "and", "eq", "returning"]
+    },
+    {
+      "name": "deleteWithUserId",
+      "description": "Delete with ownership check",
+      "keyFunctions": ["delete", "where", "and", "eq", "returning"]
+    },
+    {
+      "name": "speakerEnrichment",
+      "description": "Fetch speakers from transcript speaker_ids",
+      "keyFunctions": ["inArray", "select", "from", "where"]
+    }
+  ],
+  "commonImports": [
+    "and", "count", "desc", "eq", "getTableColumns", "ilike", "inArray", "sql"
+  ],
+  "multiTenantRule": "Always filter by eq(table.userId, ctx.auth.user.id)"
+}

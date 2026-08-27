@@ -1,0 +1,36 @@
+{
+  "stack": ["react-hook-form", "zod", "@hookform/resolvers/zod", "Radix UI Form components"],
+  "setup": {
+    "hook": "useForm",
+    "resolver": "zodResolver(schema)",
+    "defaultValues": "object matching schema"
+  },
+  "components": {
+    "Form": "Form provider",
+    "FormField": "Field wrapper with name",
+    "FormItem": "Layout wrapper",
+    "FormLabel": "Label",
+    "FormControl": "Input wrapper",
+    "FormMessage": "Error display",
+    "Input": "Text input",
+    "Textarea": "Multi-line text",
+    "Select": "Dropdown select",
+    "Checkbox": "Boolean toggle",
+    "Switch": "Styled toggle",
+    "Button": "Submit/cancel"
+  },
+  "dialogPattern": "Dialog + Form + DialogHeader/Content/Footer",
+  "submission": {
+    "mutation": "tRPC useMutation",
+    "onSuccess": "reset form, close dialog, invalidate queries",
+    "disabled": "form.formState.isSubmitting"
+  },
+  "validation": "Zod schema from module/schema.ts (shared with tRPC)",
+  "fieldTypes": {
+    "text": "Input",
+    "textarea": "Textarea",
+    "select": "Select",
+    "boolean": "Checkbox or Switch",
+    "date": "DatePicker (react-day-picker)"
+  }
+}

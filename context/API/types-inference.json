@@ -1,0 +1,19 @@
+{
+  "pattern": "inferRouterOutputs<AppRouter>[module][procedure]",
+  "examples": {
+    "MeetingGetOne": "inferRouterOutputs<AppRouter>[\"meetings\"][\"getOne\"]",
+    "MeetingGetMany": "inferRouterOutputs<AppRouter>[\"meetings\"][\"getMany\"][\"items\"]",
+    "AgentGetOne": "inferRouterOutputs<AppRouter>[\"agents\"][\"getOne\"]",
+    "AgentsGetMany": "inferRouterOutputs<AppRouter>[\"agents\"][\"getMany\"][\"items\"]"
+  },
+  "manualTypes": [
+    "MeetingStatus enum",
+    "StreamTranscriptItem interface"
+  ],
+  "usage": [
+    "Component props",
+    "Hook return types",
+    "Form default values",
+    "API response typing"
+  ]
+}

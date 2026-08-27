@@ -1,0 +1,80 @@
+{
+  "module": "agents",
+  "description": "AI Agent CRUD with instructions for meeting assistance",
+  "procedures": [
+    {
+      "name": "create",
+      "type": "mutation",
+      "input": "agentsInsertSchema",
+      "output": "Agent",
+      "description": "Create new agent with instructions"
+    },
+    {
+      "name": "getOne",
+      "type": "query",
+      "input": "{ id: string }",
+      "output": "AgentGetOne",
+      "description": "Get agent with meeting count (TODO: implement real count)"
+    },
+    {
+      "name": "getMany",
+      "type": "query",
+      "input": "{ page: number, pageSize: number, search?: string }",
+      "output": "{ items: AgentsGetMany[], total: number, totalPages: number }",
+      "description": "Paginated, searchable agent list"
+    },
+    {
+      "name": "update",
+      "type": "mutation",
+      "input": "agentsUpdateSchema",
+      "output": "Agent",
+      "description": "Update agent name and instructions"
+    },
+    {
+      "name": "remove",
+      "type": "mutation",
+      "input": "{ id: string }",
+      "output": "Agent",
+      "description": "Delete agent"
+    }
+  ],
+  "schemas": [
+    "agentsInsertSchema",
+    "agentsUpdateSchema"
+  ],
+  "types": [
+    "AgentGetOne",
+    "AgentsGetMany"
+  ],
+  "components": [
+    "AgentsView",
+    "AgentIdView",
+    "AgentIdViewHeader",
+    "AgentForm",
+    "NewAgentDialog",
+    "UpdateAgentDialog",
+    "AgentsListHeader",
+    "AgentsSearchFilter",
+    "Columns",
+    "DataPagination"
+  ],
+  "hooks": [
+    "useAgentsFilters",
+    "useConfirm"
+  ],
+  "database": {
+    "table": "agents",
+    "columns": [
+      "id", "name", "userId", "instructions", "createdAt", "updatedAt"
+    ],
+    "relations": {
+      "userId": "user (cascade)"
+    }
+  },
+  "integrations": [
+    "stream-video (as call participant)"
+  ],
+  "todos": [
+    "Implement real meeting count in getOne/getMany (currently hardcoded 5/6)"
+  ]
+}

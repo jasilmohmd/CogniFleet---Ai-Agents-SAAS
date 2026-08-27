@@ -1,0 +1,12 @@
+{
+  "module": "home",
+  "description": "Landing page for unauthenticated users",
+  "views": ["HomeView"],
+  "route": "/",
+  "patterns": [
+    "Server component (no client boundary)",
+    "Static content only",
+    "Links to /sign-in, /sign-up"
+  ],
+  "components": []
+}

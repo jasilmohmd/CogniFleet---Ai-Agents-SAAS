@@ -1,0 +1,52 @@
+{
+  "module": "dashboard",
+  "description": "Authenticated layout components: sidebar, navbar, command palette, user menu",
+  "components": [
+    {
+      "name": "DashboardSidebar",
+      "description": "Collapsible sidebar with logo, navigation groups, user button",
+      "navigation": {
+        "primary": [
+          { "icon": "VideoIcon", "label": "Meetings", "href": "/meetings" },
+          { "icon": "BotIcon", "label": "Agents", "href": "/agents" }
+        ],
+        "secondary": [
+          { "icon": "StarIcon", "label": "Upgrade", "href": "/upgrade" }
+        ]
+      },
+      "hooks": ["usePathname"],
+      "ui": ["Sidebar", "SidebarMenu", "SidebarMenuButton", "Image", "Link"]
+    },
+    {
+      "name": "DashboardNavbar",
+      "description": "Top bar with menu trigger, search, theme toggle",
+      "ui": ["NavigationMenu", "DropdownMenu", "Button", "Input"]
+    },
+    {
+      "name": "DashboardCommand",
+      "description": "Cmd+K command palette for quick actions",
+      "ui": ["Command", "CommandInput", "CommandList", "CommandItem"]
+    },
+    {
+      "name": "DashboardUserButton",
+      "description": "User avatar dropdown with profile/settings/signout",
+      "ui": ["DropdownMenu", "Avatar", "Button"]
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-sidebar",
+    "@radix-ui/react-navigation-menu",
+    "@radix-ui/react-dropdown-menu",
+    "@radix-ui/react-avatar",
+    "@radix-ui/react-command",
+    "next-themes",
+    "lucide-react"
+  ],
+  "patterns": [
+    "All components client-side",
+    "usePathname for active route highlighting",
+    "CSS variables for theming",
+    "Gradient hover states",
+    "Responsive collapse"
+  ]
+}
