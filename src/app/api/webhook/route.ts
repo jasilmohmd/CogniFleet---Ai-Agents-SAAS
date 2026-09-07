@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing meetingId" }, { status: 400 });
     }
 
-    const call = streamVideo.video.call("default", meetingId);
+    // const call = streamVideo.video.call("default", meetingId);
     // await call.end();
 
   } else if (eventType === "call.session_ended") {

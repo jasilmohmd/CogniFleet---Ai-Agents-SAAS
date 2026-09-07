@@ -39,9 +39,9 @@ export const Transcript = ({ meetingId }: Props) => {
       </div>
       <ScrollArea>
         <div className="flex flex-col gap-y-4">
-          {filteredData.map((item) => {
+          {filteredData.map((item, index) => {
             return (
-              <div className="flex flex-col gap-y-2 hover:bg-muted p-4 rounded-md border">
+              <div key={index} className="flex flex-col gap-y-2 hover:bg-muted p-4 rounded-md border">
                 <div className="flex gap-x-2 items-center">
                   <Avatar className="size-6">
                     <AvatarImage

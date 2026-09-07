@@ -9,8 +9,7 @@ import {
   ClockArrowUpIcon,
   ClockFadingIcon,
   CornerDownRightIcon,
-  LoaderIcon,
-  VideoIcon
+  LoaderIcon
 } from "lucide-react"
 
 import { cn, formatDuration } from "@/lib/utils"
